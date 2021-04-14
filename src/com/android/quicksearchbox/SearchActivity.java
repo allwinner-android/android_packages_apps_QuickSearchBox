@@ -17,6 +17,7 @@
 package com.android.quicksearchbox;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
@@ -93,6 +94,10 @@ public class SearchActivity extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+	if(ActivityManager.isUserAMonkey()){
+            Log.d("QuickSearch","monkey run finished");
+            this.finish();
+        }
         mTraceStartUp = getIntent().hasExtra(INTENT_EXTRA_TRACE_START_UP);
         if (mTraceStartUp) {
             String traceFile = new File(getDir("traces", 0), "qsb-start.trace").getAbsolutePath();
